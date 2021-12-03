@@ -55,3 +55,8 @@
   font-size: 16pt;
   text-align: center;
 }
+
+.item__add:hover {
+  background-color: blue;
+  color: aliceblue;
+}
