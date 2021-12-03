@@ -14,6 +14,6 @@ describe('1 - Teste a função fecthProducts', () => {
   });
   it('é chamado ao passar com o argumento "computador" e testa se "fetch" foi chamado', () => {
     fetchProducts('computador')
-    expect(fetch).toHaveBeenCalled();
+    expect(fetch).toHaveBeenCalledWith(url);
   });
 });
