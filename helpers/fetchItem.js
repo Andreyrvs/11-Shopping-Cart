@@ -2,13 +2,15 @@ const API_URL_ITEM = 'https://api.mercadolibre.com/items/';
 
 const fetchItem = async (item) => {
   // seu código aqui
-  const url = `${API_URL_ITEM}${item}`;
-  const promise = await (await fetch(url)).json();
-  console.log(promise);
-  return promise;
+  if (!item) return new Error('You must provide an url');
+
+  const urlItem = `${API_URL_ITEM}${item}`;
+  const promiseItem = await (await fetch(urlItem)).json();
+ 
+  return promiseItem;
 };
 
-fetchItem('MLB1615760527');
+fetchItem();
 
 if (typeof module !== 'undefined') {
   module.exports = {

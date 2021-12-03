@@ -5,10 +5,9 @@ const fetchProducts = async (param) => {
   if (!param) return new Error('You must provide an url');
 
   const url = `${API_URL}${param}`;
+  const promise = await (await fetch(url)).json();
 
-    const promise = await (await fetch(url)).json();
-  
-    return promise;
+  return promise;
 };
 
 if (typeof module !== 'undefined') {

@@ -10,7 +10,6 @@ describe('2 - Teste a função fecthItem', () => {
   it('é uma função', () => {
     const expected = typeof fetchItem;
     const atual = 'function';
-
     expect(expected).toEqual(atual);
   });
   it('execute com o argumento do item "MLB1615760527" e teste se "fetch" foi chamada', () => {
@@ -24,7 +23,11 @@ describe('2 - Teste a função fecthItem', () => {
   it('retorno da fetchItem com o argumento "MLB1615760527" é igual ao "item" importado no arquivo', async () => {
     const expected = await fetchItem('MLB1615760527');
     const atual = item;
-
     expect(expected).toEqual(atual);
-  })
+  });
+  it('sem argumento retorna um erro com a mensagem: You must provide an url', async () => {
+    const expected = await fetchItem()
+    const atual = new Error('You must provide an url');
+    expect(expected).toEqual(atual)
+  });
 });
