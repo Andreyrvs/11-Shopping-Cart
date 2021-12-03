@@ -4,15 +4,13 @@ const fetchProducts = async (param) => {
   // seu código aqui
   const url = `${API_URL}${param}`;
 
-  const promise = await fetch(url)
-  .then((response) => response.json())
-  .then((objJson) => objJson.results)
-  .catch((error) => error.toString());
-  
+  const promise = await (await fetch(url)).json();
+  console.log(promise);
+
   return promise;
 };
 
-fetchProducts();
+fetchProducts('computador');
 
 if (typeof module !== 'undefined') {
   module.exports = {
