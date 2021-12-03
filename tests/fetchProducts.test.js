@@ -13,6 +13,7 @@ describe('1 - Teste a função fecthProducts', () => {
     expect(expected).toBe(atual);
   });
   it('ao passar com o argumento "computador" e testa se "fetch" foi chamado', () => {
+    // Falso Positivo?
     fetchProducts('computador')
     expect(fetch).toHaveBeenCalled();
   });
@@ -25,5 +26,12 @@ describe('1 - Teste a função fecthProducts', () => {
     const atual = computadorSearch;
     
     expect(expected).toEqual(atual)
+  });
+  it('sem argumento retorna um erro com a mensagem: You must provide an url', async () => {
+    const expected = await fetchProducts()
+    const atual = new Error('You must provide an url')
+    expect(expected).toEqual(atual)
   })
+
+  // You must provide an url
 });
