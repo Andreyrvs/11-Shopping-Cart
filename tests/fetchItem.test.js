@@ -7,9 +7,16 @@ describe('2 - Teste a função fecthItem', () => {
   // fail('Teste vazio');
 
   it('é uma função', () => {
-    const expected = typeof fetchItem()
-    const atual = 'function'
+    const expected = typeof fetchItem;
+    const atual = 'function';
 
-    expect(expected).toBe(atual)
+    expect(expected).toEqual(atual);
+  });
+  it('execute com o argumento do item "MLB1615760527" e teste se "fetch" foi chamada', () => {
+    fetchItem('MLB1615760527');
+    expect(fetch).toBeCalled()
+  });
+  it('', () => {
+
   })
 });
