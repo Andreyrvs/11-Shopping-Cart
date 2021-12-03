@@ -24,7 +24,7 @@ describe('1 - Teste a função fecthProducts', () => {
     expect(fetch).toHaveBeenCalledWith(url);
   });
 
-  it('retorno da fetchProducts com argumento "computador" é igual ao objeto "computadorSearch"', async () => {
+  it('retorno da fetchProducts com argumento "computador" é igual ao objeto "computadorSearch" importado no arquivo', async () => {
     const expected = await fetchProducts('computador');
     const atual = computadorSearch;
     
