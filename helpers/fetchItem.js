@@ -10,8 +10,6 @@ const fetchItem = async (item) => {
   return promiseItem;
 };
 
-fetchItem();
-
 if (typeof module !== 'undefined') {
   module.exports = {
     fetchItem,

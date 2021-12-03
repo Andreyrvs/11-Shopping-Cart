@@ -12,6 +12,7 @@ function createCustomElement(element, className, innerText) {
   return e;
 }
 
+// Requisito 01
 function createProductItemElement({ id: sku, title: name, thumbnail: image }) {
   const section = document.createElement('section');
   section.className = 'item';
@@ -27,11 +28,16 @@ function createProductItemElement({ id: sku, title: name, thumbnail: image }) {
 function getSkuFromProductItem(item) {
   return item.querySelector('span.item__sku').innerText;
 }
+// apagar depois
+getSkuFromProductItem();
 
 function cartItemClickListener(event) {
   // coloque seu código aqui
+  // apagar deppois
+  return event;
 }
 
+// Requisito 02
 function createCartItemElement({ sku, name, salePrice }) {
   const li = document.createElement('li');
   li.className = 'cart__item';
@@ -39,18 +45,25 @@ function createCartItemElement({ sku, name, salePrice }) {
   li.addEventListener('click', cartItemClickListener);
   return li;
 }
+// apagar depois
+createCartItemElement();
 
-// Lista os items no HTML
-fetchProducts('computador')
-.then((resposta) => {
-  const items = document.querySelector('.items');
-
-  resposta.results.forEach(({ id, title, thumbnail }) => {  
+// Requisito 01 - Lista os items no HTML
+fetchProducts('computador').then((resposta) => {
+  resposta.results.forEach(({ id, title, thumbnail }) => {
+    const items = document.querySelector('.items');
     const elementoHTML = createProductItemElement({ id, title, thumbnail });
     items.appendChild(elementoHTML);
   });
 });
 
+// Requisito 02 - criar o carrinho
+// fetchItem('MLB1341706310')
+// .then((respostas) => {
+
+// })
+
 window.onload = () => {
   fetchProducts('computador');
- };
+  fetchItem('MLB1341706310');
+};
