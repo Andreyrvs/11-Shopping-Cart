@@ -12,12 +12,18 @@ describe('1 - Teste a função fecthProducts', () => {
     const atual = 'function';
     expect(expected).toBe(atual);
   });
-  it('é chamado ao passar com o argumento "computador" e testa se "fetch" foi chamado', () => {
+  it('ao passar com o argumento "computador" e testa se "fetch" foi chamado', () => {
     fetchProducts('computador')
     expect(fetch).toHaveBeenCalled();
   });
-  it('ao passar com o argumento "computador", a função fetch utiliza o endpoint "(url)"', () => {
+  it('ao passar com o argumento "computador", a função fetch utiliza o endpoint "url"', () => {
     fetchProducts('computador')
     expect(fetch).toHaveBeenCalledWith(url);
   });
+  it('retorno da fetchProducts com argumento "computador" é igual ao objeto "computadorSearch"', async () => {
+    const expected = await fetchProducts('computador');
+    const atual = computadorSearch;
+    
+    expect(expected).toEqual(atual)
+  })
 });

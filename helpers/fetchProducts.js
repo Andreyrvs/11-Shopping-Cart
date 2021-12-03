@@ -5,7 +5,6 @@ const fetchProducts = async (param) => {
   const url = `${API_URL}${param}`;
 
   const promise = await (await fetch(url)).json();
-  console.log(promise);
 
   return promise;
 };
