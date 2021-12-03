@@ -6,14 +6,14 @@ const fetchProducts = async (param) => {
 
   const url = `${API_URL}${param}`;
 
-    const promise = await fetch(url)
-    .then((response) => response.json());
-    // .then((objJson) => objJson.results);
-    console.log(promise);
+  try {
+    const promise = await (await fetch(url)).json();
+  
     return promise;
+  } catch (error) {
+    return error;
+  }
 };
-
-fetchProducts('computador');
 
 if (typeof module !== 'undefined') {
   module.exports = {
