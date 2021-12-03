@@ -6,13 +6,9 @@ const fetchProducts = async (param) => {
 
   const url = `${API_URL}${param}`;
 
-  try {
     const promise = await (await fetch(url)).json();
   
     return promise;
-  } catch (error) {
-    return error;
-  }
 };
 
 if (typeof module !== 'undefined') {
