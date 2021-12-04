@@ -48,24 +48,32 @@ const cartOl = document.querySelector('.cart__items');
 
 function addItemCart(event) {
   if (event.target.className === 'item__add') {
-    fetchItem(getSkuFromProductItem(event.path[1]))
+    return fetchItem(getSkuFromProductItem(event.path[1]))
     .then(({ id, title, price }) => {
-      cartOl.appendChild(createCartItemElement({ id, title, price }));
-    });  
+        cartOl.appendChild(createCartItemElement({ id, title, price }));
+        saveCartItems('cartItems', { id, title, price });
+      });
   }
 }
 
 // Requisito 01 - Lista os items no HTML
-fetchProducts('computador').then((resposta) => {
-  resposta.results.forEach(({ id, title, thumbnail }) => {
-    const items = document.querySelector('.items');
-    const elementoHTML = createProductItemElement({ id, title, thumbnail }, addItemCart);
-    items.appendChild(elementoHTML);
+  fetchProducts('computador').then((resposta) => {
+    resposta.results.forEach(({ id, title, thumbnail }) => {
+      const items = document.querySelector('.items');
+      const elementoHTML = createProductItemElement({ id, title, thumbnail }, addItemCart);
+      items.appendChild(elementoHTML);
+    });
   });
-});
+
+// Pega items do local storage 
+// const recriaCart = () => {
+//   const data = getSavedCartItems('cartItems');
+//   const items = JSON.parse(data);
+//   const { id, title, price } = items;
+//   return createProductItemElement({ id, title, price }, addItemCart);
+// };
 
 window.onload = () => {
   fetchProducts();
-  // saveCartItems('cartitems', '<ol><li>Item</li></ol>');
-  // console.log(getSavedCartItems('cartitems'));
+  // recriaCart();
 };
