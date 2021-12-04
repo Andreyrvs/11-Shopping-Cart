@@ -66,5 +66,6 @@ fetchProducts('computador').then((resposta) => {
 
 window.onload = () => {
   fetchProducts();
-  // fetchItem();
+  // saveCartItems('cartitems', '<ol><li>Item</li></ol>');
+  // console.log(getSavedCartItems('cartitems'));
 };
