@@ -13,7 +13,7 @@ function createCustomElement(element, className, innerText) {
 }
 
 // Requisito 01
-function createProductItemElement({ id: sku, title: name, thumbnail: image }) {
+function createProductItemElement({ id: sku, title: name, thumbnail: image }, callback) {
   const section = document.createElement('section');
   section.className = 'item';
 
@@ -21,7 +21,7 @@ function createProductItemElement({ id: sku, title: name, thumbnail: image }) {
   section.appendChild(createCustomElement('span', 'item__title', name));
   section.appendChild(createProductImageElement(image));
   section.appendChild(createCustomElement('button', 'item__add', 'Adicionar ao carrinho!'));
-  section.addEventListener('click', addItemCart);
+  section.addEventListener('click', callback);
   return section;
 }
 
@@ -31,7 +31,7 @@ function getSkuFromProductItem(item) {
 
 function cartItemClickListener(event) {
   // coloque seu código aqui
-  
+  event.target.remove();
 }
 
 // Requisito 02
@@ -43,26 +43,26 @@ function createCartItemElement({ id: sku, title: name, price: salePrice }) {
   return li;
 }
 
-// Requisito 01 - Lista os items no HTML
-fetchProducts('computador').then((resposta) => {
-  resposta.results.forEach(({ id, title, thumbnail }) => {
-    const items = document.querySelector('.items');
-    const elementoHTML = createProductItemElement({ id, title, thumbnail });
-    items.appendChild(elementoHTML);
-  });
-});
-
 // Requisito 02 - criar o carrinho
 const cartOl = document.querySelector('.cart__items');
 
-const addItemCart = (event) => {
+function addItemCart(event) {
   if (event.target.className === 'item__add') {
     fetchItem(getSkuFromProductItem(event.path[1]))
     .then(({ id, title, price }) => {
       cartOl.appendChild(createCartItemElement({ id, title, price }));
     });  
   }
-};
+}
+
+// Requisito 01 - Lista os items no HTML
+fetchProducts('computador').then((resposta) => {
+  resposta.results.forEach(({ id, title, thumbnail }) => {
+    const items = document.querySelector('.items');
+    const elementoHTML = createProductItemElement({ id, title, thumbnail }, addItemCart);
+    items.appendChild(elementoHTML);
+  });
+});
 
 window.onload = () => {
   fetchProducts();
