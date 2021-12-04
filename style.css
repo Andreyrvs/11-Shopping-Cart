@@ -57,6 +57,14 @@
 }
 
 .item__add:hover {
-  background-color: blue;
+  background-color: pink;
   color: aliceblue;
+}
+
+.cart__item:hover {
+  box-shadow: 2px 2px 8px rgba(131, 131, 131, 0.849);
+}
+
+.cart__item:active {
+  background-color: red;
 }
