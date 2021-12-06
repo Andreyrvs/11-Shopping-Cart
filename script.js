@@ -1,4 +1,6 @@
 const cartOl = document.querySelector('.cart__items');
+const limparCarrinho = document.querySelector('.empty-cart');
+const items = document.querySelector('.items');
 
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
@@ -14,7 +16,7 @@ function createCustomElement(element, className, innerText) {
   return e;
 }
 
-// Requisito 01
+// ====== Requisito 01 ======
 function createProductItemElement({ id: sku, title: name, thumbnail: image }, callback) {
   const section = document.createElement('section');
   section.className = 'item';
@@ -31,26 +33,42 @@ function getSkuFromProductItem(item) {
   return item.querySelector('span.item__sku').innerText;
 }
 
+// ===== Requisito 05 ======
+function creatPrice() {
+  const cart = document.querySelector('.cart');
+  const criaTag = document.createElement('p');
+  criaTag.className = 'total-price';
+  cart.appendChild(criaTag);
+}
+
+// ===== Requisito 05 ======
+function somaPrice() {
+  const dataPrice = document.querySelectorAll('.cart__item');
+  Array.from(dataPrice)
+  .reduce((acumulador, item) => acumulador + Number(item.getAttribute('data-price')), 0);
+}
+somaPrice();
+// ====== Requisito 03 =====
 function cartItemClickListener(event) {
   // coloque seu código aqui
   if (event.target.className !== 'cart__items') {
-      event.target.remove();
+    event.target.remove();
   }
 }
 
 cartOl.addEventListener('click', cartItemClickListener);
 
-// Requisito 02
+// ===== Requisito 02 =====
 function createCartItemElement({ id: sku, title: name, price: salePrice }) {
   const li = document.createElement('li');
   li.className = 'cart__item';
   li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`;
   // li.addEventListener('click', cartItemClickListener);
+  li.setAttribute('data-price', salePrice);
   return li;
 }
 
-// Requisito 02 - criar o carrinho e  Colocar em local storage
-
+// ===== Requisito 02 - criar o carrinho e  Colocar em local storage =====
 function addItemCart(event) {
   if (event.target.className === 'item__add') {
     return fetchItem(getSkuFromProductItem(event.path[1]))
@@ -58,24 +76,45 @@ function addItemCart(event) {
         cartOl.appendChild(createCartItemElement({ id, title, price }));
         saveCartItems(cartOl.innerHTML);
       });
-    }
   }
+}
 
-// Requisito 01 - Lista os items no HTML
-  fetchProducts('computador').then((resposta) => {
-    resposta.results.forEach(({ id, title, thumbnail }) => {
-      const items = document.querySelector('.items');
-      const elementoHTML = createProductItemElement({ id, title, thumbnail }, addItemCart);
-      items.appendChild(elementoHTML);
-    });
+// ===== Requisito 07 =====
+
+function addLoad() {
+  const p = createCustomElement('p', 'loading', 'carregando...');
+  items.appendChild(p);
+}
+
+function removeLoad() {
+  const load = document.querySelector('.loading');
+  load.remove();
+}
+
+// ===== Requisito 01 - Lista os items no HTML =====
+function showItem() {
+fetchProducts('computador').then((resposta) => {
+  resposta.results.forEach(({ id, title, thumbnail }) => {
+    const elementoHTML = createProductItemElement({ id, title, thumbnail }, addItemCart);
+    items.appendChild(elementoHTML);
   });
+  removeLoad();
+});
+}
 
-// Pega items do local storage 
+// ===== Requisito 04 Pega items do local storage e Cria as Li's =====
 function recriaCart() {
   cartOl.innerHTML = getSavedCartItems();
 }
 
+limparCarrinho.addEventListener('click', () => {
+  cartOl.innerHTML = '';
+  localStorage.removeItem('cartItems');
+});
+
 window.onload = () => {
-  fetchProducts();
+  addLoad();
+  showItem();
   recriaCart();
+  creatPrice();
 };
