@@ -1,9 +1,5 @@
-let espalhaArray = [];
-
-const saveCartItems = (chave, items) => {
-  // seu código aqui
-  espalhaArray = [...espalhaArray, items];
-  return localStorage.setItem(chave, JSON.stringify(espalhaArray));
+const saveCartItems = (items) => {
+  localStorage.setItem('cartItems', items);
 };
 
 if (typeof module !== 'undefined') {

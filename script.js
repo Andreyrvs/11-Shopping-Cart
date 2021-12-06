@@ -1,3 +1,5 @@
+const cartOl = document.querySelector('.cart__items');
+
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
   img.className = 'item__image';
@@ -31,30 +33,33 @@ function getSkuFromProductItem(item) {
 
 function cartItemClickListener(event) {
   // coloque seu código aqui
-  event.target.remove();
+  if (event.target.className !== 'cart__items') {
+      event.target.remove();
+  }
 }
+
+cartOl.addEventListener('click', cartItemClickListener);
 
 // Requisito 02
 function createCartItemElement({ id: sku, title: name, price: salePrice }) {
   const li = document.createElement('li');
   li.className = 'cart__item';
   li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`;
-  li.addEventListener('click', cartItemClickListener);
+  // li.addEventListener('click', cartItemClickListener);
   return li;
 }
 
-// Requisito 02 - criar o carrinho
-const cartOl = document.querySelector('.cart__items');
+// Requisito 02 - criar o carrinho e  Colocar em local storage
 
 function addItemCart(event) {
   if (event.target.className === 'item__add') {
     return fetchItem(getSkuFromProductItem(event.path[1]))
     .then(({ id, title, price }) => {
         cartOl.appendChild(createCartItemElement({ id, title, price }));
-        saveCartItems('cartItems', { id, title, price });
+        saveCartItems(cartOl.innerHTML);
       });
+    }
   }
-}
 
 // Requisito 01 - Lista os items no HTML
   fetchProducts('computador').then((resposta) => {
@@ -66,14 +71,11 @@ function addItemCart(event) {
   });
 
 // Pega items do local storage 
-// const recriaCart = () => {
-//   const data = getSavedCartItems('cartItems');
-//   const items = JSON.parse(data);
-//   const { id, title, price } = items;
-//   return createProductItemElement({ id, title, price }, addItemCart);
-// };
+function recriaCart() {
+  cartOl.innerHTML = getSavedCartItems();
+}
 
 window.onload = () => {
   fetchProducts();
-  // recriaCart();
+  recriaCart();
 };
