@@ -39,7 +39,7 @@ function somaPrice() {
   const valorTotal = Array.from(dataPrice)
   .reduce((acumulador, item) => acumulador + Number(item.getAttribute('data-price')), 0);
   const cart = document.querySelector('.total-price');
-  cart.innerHTML = valorTotal;
+  cart.innerHTML = `Total: ${valorTotal}`;
 }
 
 // ====== Requisito 03 =====
