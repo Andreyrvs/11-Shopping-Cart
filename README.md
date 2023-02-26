@@ -2,7 +2,7 @@
 
 ## Contexto
 
-Este projeto trata-se de uma ferramenta de back-office para armazenar e buscar dados de erros que ocorreram com clientes.
+Este projeto trata-se de carrinho de compras totalmente dinâmico! e consumindo dados diretamente de uma API!. Utilizando a API do Mercado Livre para buscarmos produtos à venda.
 
 > O diretório helpers/ Foi criado pela [TRYBE](https://www.betrybe.com/). Todas funções e lógica implementadas nesse diretório foi feita pela [TRYBE](https://www.betrybe.com/)
 > Eu Utilizo essas funções no projeto.
