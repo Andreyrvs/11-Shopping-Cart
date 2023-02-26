@@ -20,6 +20,7 @@ function createCustomElement(element, className, innerText) {
 function createProductItemElement({ id: sku, title: name, thumbnail: image }, callback) {
   const section = document.createElement('section');
   section.className = 'item';
+  section.id = sku
 
   section.appendChild(createCustomElement('span', 'item__sku', sku));
   section.appendChild(createCustomElement('span', 'item__title', name));
@@ -66,7 +67,8 @@ function createCartItemElement({ id: sku, title: name, price: salePrice }) {
 // ===== Requisito 02 - criar o carrinho e  Colocar em local storage =====
 function addItemCart(event) {
   if (event.target.className === 'item__add') {
-    return fetchItem(getSkuFromProductItem(event.path[1]))
+    console.log(event.currentTarget.id);
+    return fetchItem(event.currentTarget.id)
     .then(({ id, title, price }) => {
         cartOl.appendChild(createCartItemElement({ id, title, price }));
         saveCartItems(cartOl.innerHTML);
