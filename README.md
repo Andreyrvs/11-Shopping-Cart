@@ -4,8 +4,8 @@
 
 Este projeto trata-se de uma ferramenta de back-office para armazenar e buscar dados de erros que ocorreram com clientes.
 
-> O diretorio helpers/ Foi criado pela [TRYBE](https://www.betrybe.com/). Todas funcoes e logica implementadas nesse diretorio foi feita pela [TRYBE](https://www.betrybe.com/)
-> Eu Utilizo essas funçoes no projeto.
+> O diretório helpers/ Foi criado pela [TRYBE](https://www.betrybe.com/). Todas funções e lógica implementadas nesse diretório foi feita pela [TRYBE](https://www.betrybe.com/)
+> Eu Utilizo essas funções no projeto.
 
 ## Técnologias usadas
 
