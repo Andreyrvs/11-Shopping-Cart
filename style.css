@@ -1,7 +1,12 @@
 .container {
-  display: flex;
+  /* display: flex;
   justify-content: space-around;
-  width: 100%;
+  width: 100%; */
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
 }
 
 .items {
@@ -24,7 +29,7 @@
   flex-direction: column;
   height: auto;
   margin: 5px;
-  width: 300px;
+  /* width: 300px; */
 }
 
 .item .item__sku {
@@ -50,6 +55,8 @@
 }
 
 .cart {
+  border: 2px solid blue;
+  border-radius: 5px;
   display: flex;
   flex-basis: 30%;
   flex-flow: column wrap;
