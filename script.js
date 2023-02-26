@@ -67,7 +67,6 @@ function createCartItemElement({ id: sku, title: name, price: salePrice }) {
 // ===== Requisito 02 - criar o carrinho e  Colocar em local storage =====
 function addItemCart(event) {
   if (event.target.className === 'item__add') {
-    console.log(event.currentTarget.id);
     return fetchItem(event.currentTarget.id)
     .then(({ id, title, price }) => {
         cartOl.appendChild(createCartItemElement({ id, title, price }));
